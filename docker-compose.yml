@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  sdt:
+    build: .
+    volumes:
+      - .:/mnt/shared/simulated-digital-twin/
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    network_mode: "host"
+    image: sdt
+    working_dir: /mnt/shared/simulated-digital-twin
+    environment:
+      - DISPLAY=${DISPLAY}
+    stdin_open: true
+    tty: true
+
