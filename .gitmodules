@@ -1,3 +1,6 @@
 [submodule "project1-boptest"]
 	path = project1-boptest
 	url = https://github.com/ibpsa/project1-boptest
+[submodule "boptest-bacnet-proxy"]
+	path = boptest-bacnet-proxy
+	url = https://github.com/epaulson/boptest-bacnet-proxy
