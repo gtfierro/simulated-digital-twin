@@ -14,7 +14,9 @@ This may take a few minutes as the boptest repo is large
 Apply patches to boptest-bacnet-proxy:
 
 ```bash
-git apply boptest-proxy.patch
+cd boptest-bacnet-proxy
+git apply ../boptest-proxy.patch
+cp ../Dockerfile.boptest-proxy Dockerfile
 ```
 
 ---
