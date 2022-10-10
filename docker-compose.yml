@@ -1,15 +1,32 @@
 version: "3.8"
 services:
-  sdt:
-    build: .
-    volumes:
-      - .:/mnt/shared/simulated-digital-twin/
-      - /tmp/.X11-unix:/tmp/.X11-unix
-    network_mode: "host"
-    image: sdt
-    working_dir: /mnt/shared/simulated-digital-twin
-    environment:
-      - DISPLAY=${DISPLAY}
-    stdin_open: true
-    tty: true
+  #sdt:
+  #  build: .
+  #  volumes:
+  #    - .:/mnt/shared/simulated-digital-twin/
+  #    - /tmp/.X11-unix:/tmp/.X11-unix
+  #  network_mode: "host"
+  #  image: sdt
+  #  working_dir: /mnt/shared/simulated-digital-twin
+  #  environment:
+  #    - DISPLAY=${DISPLAY}
+  #  stdin_open: true
+  #  tty: true
 
+  bacnet-shim:
+    build: boptest-bacnet-proxy
+    ports:
+    - target: 47808
+      published: 47808
+      protocol: udp
+      mode: host
+
+    networks:
+      boptest-net:
+        ipv4_address: 10.0.0.7
+
+  bacnet-cli:
+    build: interact
+    networks:
+      boptest-net:
+        ipv4_address: 10.0.0.8
