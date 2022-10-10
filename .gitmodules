@@ -1,0 +1,3 @@
+[submodule "project1-boptest"]
+	path = project1-boptest
+	url = https://github.com/ibpsa/project1-boptest
