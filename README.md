@@ -1,3 +1,9 @@
+## IPs to Remember
+
+- `10.0.0.1`: the device hosting the BACnet objects for the simulation
+- `10.0.0.7`: the device hosting the BACnet-boptest proxy
+- `10.0.0.8`: the device hosting the BACnet cli
+
 ## Setup
 
 Submodule stuff:
@@ -48,5 +54,6 @@ make run
 Execute commands from the `bacnet-cli` container
 
 ```bash
-docker exec -it project1-boptest-bacnet-cli-1 python ReadAllProperties.py 10.0.0.8 analogValue 63
+docker exec -it project1-boptest-bacnet-cli-1 python DiscoverDevices.py
+docker exec -it project1-boptest-bacnet-cli-1 python ReadAllProperties.py 10.0.0.1 analogValue 63
 ```
