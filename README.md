@@ -20,6 +20,13 @@ cp ../Dockerfile.boptest-proxy Dockerfile
 cp ../run.sh .
 ```
 
+Apply patches to BOPtest:
+
+```bash
+cd project1-boptest
+git apply ../boptest.patch
+```
+
 ---
 
 Build the containers

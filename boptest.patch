@@ -1,0 +1,13 @@
+diff --git a/docker-compose.yml b/docker-compose.yml
+index 41ddd621..40ac4250 100644
+--- a/docker-compose.yml
++++ b/docker-compose.yml
+@@ -23,3 +23,8 @@ networks:
+   boptest-net:
+     name: boptest-net
+     attachable: true
++    ipam:
++      driver: default
++      config:
++        - subnet: "10.0.0.0/24"
++          gateway: "10.0.0.1"
