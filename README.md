@@ -17,6 +17,7 @@ Apply patches to boptest-bacnet-proxy:
 cd boptest-bacnet-proxy
 git apply ../boptest-proxy.patch
 cp ../Dockerfile.boptest-proxy Dockerfile
+cp ../run.sh .
 ```
 
 ---
