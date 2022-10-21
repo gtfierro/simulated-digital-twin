@@ -46,7 +46,7 @@ make build
 Run the containers
 
 ```bash
-make run
+make up
 ```
 
 ---

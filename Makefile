@@ -1,13 +1,13 @@
-TESTCASE=multizone_office_simple_air
+include .env
 
 .PHONY: build down run
 
 build:
-	 docker compose -f project1-boptest/docker-compose.yml -f docker-compose.yml build
+	 docker-compose -f docker-compose.yml build
 
 down:
-	 docker compose -f project1-boptest/docker-compose.yml -f docker-compose.yml down
+	 docker-compose -f docker-compose.yml down
 
-run:
-	docker compose -f project1-boptest/docker-compose.yml -f docker-compose.yml up -d
-	docker compose -f project1-boptest/docker-compose.yml -f docker-compose.yml logs -f
+up:
+	docker-compose -f docker-compose.yml up -d
+	docker-compose -f docker-compose.yml logs -f

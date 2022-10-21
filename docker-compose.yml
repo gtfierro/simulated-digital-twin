@@ -12,14 +12,31 @@ services:
   #    - DISPLAY=${DISPLAY}
   #  stdin_open: true
   #  tty: true
+  boptest:
+    image: boptest_base
+    build:
+      context: ./project1-boptest
+    volumes:
+      - ./project1-boptest/testcases/${TESTCASE}/models/wrapped.fmu:${APP_PATH}/models/wrapped.fmu
+      - ./project1-boptest/testcases/${TESTCASE}/doc/:${APP_PATH}/doc/
+      - ./project1-boptest/restapi.py:${APP_PATH}/restapi.py
+      - ./project1-boptest/testcase.py:${APP_PATH}/testcase.py
+      - ./project1-boptest/version.txt:${APP_PATH}/version.txt
+      - ./project1-boptest/data:${APP_PATH}/data/
+      - ./project1-boptest/forecast:${APP_PATH}/forecast/
+      - ./project1-boptest/kpis:${APP_PATH}/kpis/
+    ports:
+      - 127.0.0.1:5000:5000
+    networks:
+      - boptest-net
 
   bacnet-shim:
     build: boptest-bacnet-proxy
-    ports:
-    - target: 47808
-      published: 47808
-      protocol: udp
-      mode: host
+      # ports:
+      # - target: 47808
+      #   published: 47808
+      #   protocol: udp
+      #   mode: host
 
     networks:
       boptest-net:
@@ -30,3 +47,15 @@ services:
     networks:
       boptest-net:
         ipv4_address: 10.0.0.8
+
+networks:
+  boptest-net:
+    name: boptest-net
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "10.0.0.0/24"
+          gateway: "10.0.0.1"
+    attachable: true
+      #    external: true
