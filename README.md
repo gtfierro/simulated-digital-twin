@@ -1,3 +1,9 @@
+# Simulated Digital Twin
+
+## Virtual Machine
+
+Easiest thing to do is to run this in a virtual machine. See [the virtual-machine directory](https://github.com/gtfierro/simulated-digital-twin/tree/main/virtual-machine)
+
 ## IPs to Remember
 
 - `10.0.0.1`: the device hosting the BACnet objects for the simulation
