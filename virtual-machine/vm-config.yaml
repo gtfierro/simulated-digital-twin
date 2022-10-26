@@ -29,7 +29,8 @@ write_files:
 groups:
   - docker
 
-# Install Docker, for production, consider pinning to stable versionsruncmd:
+# Install Docker, for production, consider pinning to stable versions
+runcmd:
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
   - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
   - apt-get update -y
