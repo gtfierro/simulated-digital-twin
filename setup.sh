@@ -13,5 +13,3 @@ cd project1-boptest
 git apply ../boptest.patch
 
 make build
-
-make up
