@@ -32,11 +32,11 @@ services:
 
   bacnet-shim:
     build: boptest-bacnet-proxy
-      # ports:
-      # - target: 47808
-      #   published: 47808
-      #   protocol: udp
-      #   mode: host
+    ports:
+    - target: 47808
+      published: 47808
+      protocol: udp
+      mode: host
 
     networks:
       boptest-net:
