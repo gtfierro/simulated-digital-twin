@@ -13,19 +13,20 @@ index 4a94621..3fe09b6 100644
  vendorIdentifier: 15
 -
 diff --git a/BopTestProxy.py b/BopTestProxy.py
-index 24a4fdd..2c4b2aa 100644
+index 24a4fdd..1eefa81 100644
 --- a/BopTestProxy.py
 +++ b/BopTestProxy.py
-@@ -57,7 +57,7 @@ activation_signal = {}
+@@ -57,7 +57,8 @@ activation_signal = {}
  nextState = None
  g = None
  
 -baseurl = "http://localhost:5000"
 +baseurl = "http://boptest:5000"
++#baseurl = "http://simulated-digital-twin-bacnet-shim-1:5000"
  boptest_measurements = None
  boptest_inputs = None
  
-@@ -190,7 +190,7 @@ def update_boptest_data():
+@@ -190,7 +191,7 @@ def update_boptest_data():
      #print("Advancing with signals: " + str(signals))
      response = requests.post(
      #    "http://localhost:5000/advance", data={"oveAct_u": next_oveAct_u, "oveAct_activate": next_oveAct_activate}
@@ -42,7 +43,8 @@ index 24a4fdd..2c4b2aa 100644
 +        for k, v in nextState['payload'].items():
              if _debug:
                  update_boptest_data._debug("    - k, v: %r, %r", k, v)
-@@ -268,6 +268,7 @@ def main():
+ 
+@@ -268,6 +269,7 @@ def main():
          _log.debug("    - this_device: %r", this_device)
  
      # make a sample application
