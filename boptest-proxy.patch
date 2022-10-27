@@ -34,6 +34,14 @@ index 24a4fdd..2c4b2aa 100644
      )
      if response.status_code != 200:
          print("Error response: %r" % (response.status_code,))
+@@ -210,7 +211,7 @@ def update_boptest_data():
+     # because if say the call to /advance takes 3 seconds, we want to get called again in 2 seconds, not in 5 seconds. 
+     global nextState
+     if nextState:
+-        for k, v in nextState.items():
++        for k, v in nextState['payload'].items():
+             if _debug:
+                 update_boptest_data._debug("    - k, v: %r, %r", k, v)
 @@ -268,6 +268,7 @@ def main():
          _log.debug("    - this_device: %r", this_device)
  
