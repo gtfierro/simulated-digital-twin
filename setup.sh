@@ -2,7 +2,7 @@
 set -ex
 
 git submodule init
-git submodule update --init --recursive
+git submodule update --init --recursive --progress
 
 cd boptest-bacnet-proxy
 git apply ../boptest-proxy.patch
