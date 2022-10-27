@@ -3,11 +3,11 @@
 package_update: true
 package_upgrade: true
 packages:
-  - apt-transport-https
   - ca-certificates
   - curl
-  - gnupg-agent
+  - gnupg
   - software-properties-common
+  - lsb-release
   - python3
   - python3-venv
   - build-essential
@@ -17,13 +17,13 @@ write_files:
   - path: /etc/sysctl.d/enabled_ipv4_forwarding.conf
     content: |
       net.ipv4.conf.all.forwarding=1
-  - path: /tmp/setup-simulated-digital-twin.sh
+  - path: /home/ubuntu/setup-simulated-digital-twin.sh
     permissions: "0755"
+    owner: ubuntu
     content: |
-      cd /home/ubuntu
       git clone https://github.com/gtfierro/simulated-digital-twin
       cd simulated-digital-twin && bash setup.sh
-
+      echo "NOW RUN 'make up' TO START"
 
 # create the docker group
 groups:
@@ -31,14 +31,15 @@ groups:
 
 # Install Docker, for production, consider pinning to stable versions
 runcmd:
-  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-  - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-  - apt-get update -y
-  - apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose
+  - chown ubuntu /home/ubuntu
+  - mkdir -p /etc/apt/keyrings
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+  - echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+  - apt update
+  - apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
   - systemctl start docker
   - systemctl enable docker
-  - chmod +x /tmp/setup-simulated-digital-twin.sh
-  - bash /tmp/setup-simulated-digital-twin.sh
+  - chmod +x /home/ubuntu/setup-simulated-digital-twin.sh
 
 # Add default auto created user to docker group
 system_info:
